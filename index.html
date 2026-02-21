@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Start | Obsidian</title>
+
+    <!-- Fonts: Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ["Poppins", "sans-serif"],
+            },
+            colors: {
+              primary: "#3b82f6",
+              dark: "#181C20",
+              light: "#f8fafc" /* slate-50 */,
+              glass: {
+                light: "rgba(255, 255, 255, 0.7)",
+                dark: "rgba(24, 28, 32, 0.6)",
+              },
+              glassBorder: {
+                light: "rgba(255, 255, 255, 0.5)",
+                dark: "rgba(255, 255, 255, 0.1)",
+              },
+            },
+            boxShadow: {
+              glass: "0 8px 32px 0 rgba(31, 38, 135, 0.07)",
+            },
+          },
+        },
+      };
+    </script>
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body
+    class="bg-white dark:bg-dark text-slate-800 dark:text-slate-200 min-h-screen flex flex-col justify-center items-center relative transition-colors duration-300 overflow-x-hidden antialiased"
+  >
+    <!-- Background Elements for Elegance -->
+    <div
+      class="fixed top-0 left-0 w-full h-full overflow-hidden -z-10 pointer-events-none"
+    >
+      <div
+        class="absolute top-[-10%] left-[-10%] w-96 h-96 bg-blue-500/10 dark:bg-blue-500/5 rounded-full blur-[100px]"
+      ></div>
+      <div
+        class="absolute bottom-[-10%] right-[-10%] w-96 h-96 bg-purple-500/10 dark:bg-purple-500/5 rounded-full blur-[100px]"
+      ></div>
+    </div>
+
+    <!-- Theme Toggle -->
+    <button
+      id="themeToggle"
+      class="absolute top-6 right-6 p-3 rounded-full bg-white dark:bg-slate-800 shadow-sm border border-slate-200 dark:border-slate-700 hover:scale-105 active:scale-95 transition-all text-slate-500 dark:text-slate-400 hover:text-primary dark:hover:text-primary cursor-pointer z-50 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 dark:focus:ring-offset-slate-900"
+    >
+      <i data-lucide="moon" id="moonIcon" class="w-5 h-5 hidden"></i>
+      <i data-lucide="sun" id="sunIcon" class="w-5 h-5 hidden"></i>
+    </button>
+
+    <!-- Main Container -->
+    <main class="w-full max-w-3xl px-6 flex flex-col items-center z-10">
+      <!-- Stoic Quote -->
+      <div class="mb-12 text-center opacity-0 animate-fade-in-up">
+        <p
+          id="quoteText"
+          class="text-xl md:text-2xl font-light italic text-slate-600 dark:text-slate-300 mb-4 leading-relaxed tracking-wide"
+        >
+          "We suffer more often in imagination than in reality."
+        </p>
+        <p
+          id="quoteAuthor"
+          class="text-sm font-medium text-slate-400 dark:text-slate-500 uppercase tracking-widest"
+        >
+          — Seneca
+        </p>
+      </div>
+
+      <!-- Search Form -->
+      <form
+        id="searchForm"
+        class="w-full flex-col items-center opacity-0 animate-fade-in-up"
+        style="animation-delay: 100ms"
+      >
+        <div class="w-full flex flex-col gap-3">
+          
+          <!-- Main Search Input Area -->
+          <div class="relative w-full group flex items-center bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 focus-within:ring-2 focus-within:ring-primary/20 transition-all">
+
+            <!-- Main Search Input -->
+            <input
+              type="text"
+              id="searchInput"
+              placeholder="Search the web or vault..."
+              class="w-full pl-4 pr-16 py-4 bg-transparent focus:outline-none text-lg placeholder-slate-400 dark:placeholder-slate-500 text-slate-800 dark:text-slate-100 placeholder:font-light"
+              autocomplete="off"
+            />
+
+            <!-- Advanced Options Toggle -->
+            <button
+              type="button"
+              id="advToggleBtn"
+              class="absolute right-3 top-1/2 -translate-y-1/2 p-2 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-400 hover:text-primary dark:hover:text-primary transition-colors cursor-pointer focus:outline-none z-10"
+            >
+              <i data-lucide="sliders-horizontal" class="w-5 h-5"></i>
+            </button>
+          </div>
+
+          <!-- Floating Engine Bar -->
+          <div class="flex items-center justify-center gap-2 sm:gap-4 px-4 py-3 bg-white/70 dark:bg-slate-800/50 backdrop-blur-md rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 mx-auto w-fit">
+            <input type="hidden" id="searchEngine" value="google">
+            
+            <button type="button" class="engine-option p-2 rounded-xl text-slate-400 hover:text-primary hover:bg-slate-100 dark:hover:bg-slate-700/50 transition-all flex items-center justify-center relative group" data-value="google">
+              <svg viewBox="0 0 24 24" class="w-5 h-5 fill-current"><path d="M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .307 5.387.307 12s5.56 12 12.173 12c3.573 0 6.267-1.173 8.373-3.36 2.16-2.16 2.84-5.213 2.84-7.667 0-.76-.053-1.467-.173-2.053H12.48z"/></svg>
+              <span class="absolute -top-8 bg-slate-800 dark:bg-slate-700 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">Google</span>
+            </button>
+            <button type="button" class="engine-option p-2 rounded-xl text-slate-400 hover:text-primary hover:bg-slate-100 dark:hover:bg-slate-700/50 transition-all flex items-center justify-center relative group" data-value="duckduckgo">
+              <img src="assets/icons/duckduckgo-svgrepo-com.svg" alt="DuckDuckGo" class="w-5 h-5 opacity-70 group-hover:opacity-100 transition-opacity">
+              <span class="absolute -top-8 bg-slate-800 dark:bg-slate-700 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">DuckDuckGo</span>
+            </button>
+            <button type="button" class="engine-option p-2 rounded-xl text-slate-400 hover:text-primary hover:bg-slate-100 dark:hover:bg-slate-700/50 transition-all flex items-center justify-center relative group" data-value="bing">
+              <img src="assets/icons/bing-svgrepo-com.svg" alt="Bing" class="w-5 h-5 opacity-70 group-hover:opacity-100 transition-opacity">
+              <span class="absolute -top-8 bg-slate-800 dark:bg-slate-700 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">Bing</span>
+            </button>
+            <button type="button" class="engine-option p-2 rounded-xl text-slate-400 hover:text-primary hover:bg-slate-100 dark:hover:bg-slate-700/50 transition-all flex items-center justify-center relative group" data-value="yahoo">
+              <img src="assets/icons/yahoo-svgrepo-com.svg" alt="Yahoo" class="w-5 h-5 opacity-70 group-hover:opacity-100 transition-opacity">
+              <span class="absolute -top-8 bg-slate-800 dark:bg-slate-700 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">Yahoo!</span>
+            </button>
+            <button type="button" class="engine-option p-2 rounded-xl text-slate-400 hover:text-primary hover:bg-slate-100 dark:hover:bg-slate-700/50 transition-all flex items-center justify-center relative group" data-value="yandex">
+               <img src="assets/icons/yandex-svgrepo-com.svg" alt="Yandex" class="w-5 h-5 opacity-70 group-hover:opacity-100 transition-opacity">
+              <span class="absolute -top-8 bg-slate-800 dark:bg-slate-700 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">Yandex</span>
+            </button>
+            <button type="button" class="engine-option p-2 rounded-xl text-slate-400 hover:text-primary hover:bg-slate-100 dark:hover:bg-slate-700/50 transition-all flex items-center justify-center relative group" data-value="youtube">
+              <img src="assets/icons/youtube-color-svgrepo-com.svg" alt="YouTube" class="w-5 h-5 opacity-70 group-hover:opacity-100 transition-opacity">
+              <span class="absolute -top-8 bg-slate-800 dark:bg-slate-700 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">YouTube</span>
+            </button>
+            <button type="button" class="engine-option p-2 rounded-xl text-slate-400 hover:text-primary hover:bg-slate-100 dark:hover:bg-slate-700/50 transition-all flex items-center justify-center relative group" data-value="wikipedia">
+              <img src="assets/icons/wikipedia-logotype-of-earth-puzzle-svgrepo-com.svg" alt="Wikipedia" class="w-5 h-5 opacity-70 group-hover:opacity-100 transition-opacity">
+              <span class="absolute -top-8 bg-slate-800 dark:bg-slate-700 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">Wikipedia</span>
+            </button>
+            <button type="button" class="engine-option p-2 rounded-xl text-slate-400 hover:text-primary hover:bg-slate-100 dark:hover:bg-slate-700/50 transition-all flex items-center justify-center relative group" data-value="reddit">
+              <svg viewBox="0 0 24 24" class="w-5 h-5 fill-current"><path d="M12 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0zm5.01 4.744c.688 0 1.25.561 1.25 1.249a1.25 1.25 0 0 1-2.498.056l-2.597-.547-.8 3.747c1.824.07 3.48.632 4.674 1.488.308-.309.73-.491 1.207-.491.968 0 1.754.786 1.754 1.754 0 .716-.435 1.333-1.01 1.614a3.111 3.111 0 0 1 .042.52c0 2.694-3.13 4.87-7.004 4.87-3.874 0-7.004-2.176-7.004-4.87 0-.183.015-.366.043-.534A1.748 1.748 0 0 1 4.028 12c0-.968.786-1.754 1.754-1.754.463 0 .898.196 1.207.49 1.207-.883 2.878-1.43 4.744-1.487l.885-4.182a.342.342 0 0 1 .14-.197.35.35 0 0 1 .238-.042l2.906.617a1.214 1.214 0 0 1 1.108-.701zM9.25 12C8.56 12 8 12.56 8 13.25c0 .69.56 1.25 1.25 1.25.69 0 1.25-.56 1.25-1.25C10.5 12.56 9.94 12 9.25 12zm5.5 0c-.69 0-1.25.56-1.25 1.25 0 .69.56 1.25 1.25 1.25.69 0 1.25-.56 1.25-1.25C16 12.56 15.44 12 14.75 12zm-5.466 3.99a.327.327 0 0 0-.231.094.33.33 0 0 0 0 .463c.842.842 2.484.913 2.961.913.477 0 2.105-.056 2.961-.913a.361.361 0 0 0 .029-.463.33.33 0 0 0-.464 0c-.547.533-1.684.73-2.512.73-.828 0-1.979-.196-2.512-.73a.326.326 0 0 0-.232-.095z"/></svg>
+              <span class="absolute -top-8 bg-slate-800 dark:bg-slate-700 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">Reddit</span>
+            </button>
+            <button type="button" class="engine-option p-2 rounded-xl text-slate-400 hover:text-primary hover:bg-slate-100 dark:hover:bg-slate-700/50 transition-all flex items-center justify-center relative group" data-value="github">
+              <svg viewBox="0 0 24 24" class="w-5 h-5 fill-current"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+              <span class="absolute -top-8 bg-slate-800 dark:bg-slate-700 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">GitHub</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Advanced Search Panel -->
+        <div
+          id="advPanel"
+          class="w-full mt-0 bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl border-0 border-transparent dark:border-transparent rounded-2xl shadow-glass overflow-hidden max-h-0 opacity-0 transition-all duration-500 ease-in-out"
+        >
+          <div
+            class="p-6 grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4 text-sm max-h-[60vh] overflow-y-auto custom-scrollbar"
+          >
+            <h3
+              class="col-span-full text-xs font-semibold uppercase tracking-wider text-slate-500 mb-2 mt-2 first:mt-0"
+            >
+              Find pages with...
+            </h3>
+
+            <div class="input-group">
+              <label>All these words</label>
+              <input
+                type="text"
+                id="advAll"
+                placeholder="e.g. tri-colour rat terrier"
+              />
+            </div>
+
+            <div class="input-group">
+              <label>This exact word or phrase</label>
+              <input
+                type="text"
+                id="advExact"
+                placeholder='e.g. "rat terrier"'
+              />
+            </div>
+
+            <div class="input-group">
+              <label>Any of these words</label>
+              <input
+                type="text"
+                id="advAny"
+                placeholder="e.g. miniature OR standard"
+              />
+            </div>
+
+            <div class="input-group">
+              <label>None of these words</label>
+              <input
+                type="text"
+                id="advNone"
+                placeholder="e.g. rodent, Jack Russell"
+              />
+            </div>
+
+            <div
+              class="input-group col-span-full md:col-span-2 grid grid-cols-2 gap-4"
+            >
+              <div class="w-full">
+                <label>Numbers ranging from</label>
+                <input type="text" id="advNumForm" placeholder="e.g. 10" />
+              </div>
+              <div class="w-full">
+                <label>To</label>
+                <input type="text" id="advNumTo" placeholder="e.g. 35" />
+              </div>
+            </div>
+
+            <h3
+              class="col-span-full text-xs font-semibold uppercase tracking-wider text-slate-500 mb-2 mt-4"
+            >
+              Then narrow your results by...
+            </h3>
+
+            <div class="input-group">
+              <label>Language</label>
+              <select id="advLang">
+                <option value="">Any language</option>
+                <option value="lang_en">English</option>
+                <option value="lang_es">Spanish</option>
+                <option value="lang_fr">French</option>
+                <option value="lang_de">German</option>
+                <!-- More can be added via JS -->
+              </select>
+            </div>
+
+            <div class="input-group">
+              <label>Region</label>
+              <select id="advRegion">
+                <option value="">Any region</option>
+                <option value="countryUS">United States</option>
+                <option value="countryGB">United Kingdom</option>
+                <option value="countryCA">Canada</option>
+                <!-- More can be added via JS -->
+              </select>
+            </div>
+
+            <div class="input-group">
+              <label>Last update</label>
+              <select id="advUpdate">
+                <option value="">Anytime</option>
+                <option value="d">Past 24 hours</option>
+                <option value="w">Past week</option>
+                <option value="m">Past month</option>
+                <option value="y">Past year</option>
+              </select>
+            </div>
+
+            <div class="input-group">
+              <label>Site or domain</label>
+              <input
+                type="text"
+                id="advSite"
+                placeholder="e.g. wikipedia.org, .edu"
+              />
+            </div>
+
+            <div class="input-group">
+              <label>Terms appearing</label>
+              <select id="advTerms">
+                <option value="anywhere">Anywhere in the page</option>
+                <option value="title">In the title</option>
+                <option value="text">In the text</option>
+                <option value="url">In the URL</option>
+                <option value="links">In links to the page</option>
+              </select>
+            </div>
+
+            <div class="input-group">
+              <label>File type</label>
+              <select id="advType">
+                <option value="">Any format</option>
+                <option value="pdf">PDF (.pdf)</option>
+              </select>
+            </div>
+
+            <div class="col-span-full flex justify-end mt-4">
+              <button
+                type="submit"
+                class="bg-primary hover:bg-blue-600 text-white px-6 py-2 rounded-xl font-medium transition-colors shadow-md shadow-primary/20"
+              >
+                Advanced Search
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hidden submit for standard enter key -->
+        <button type="submit" class="hidden"></button>
+      </form>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
