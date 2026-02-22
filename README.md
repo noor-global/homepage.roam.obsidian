@@ -1,4 +1,4 @@
-# Minimal Browser Homepage
+# Homepage For Roam@Obsidian
 
 A functional and aesthetically pleasing minimalist browser homepage designed specifically for use as a start page or New Tab override, particularly fitting alongside markdown knowledge bases or minimalist workspaces. 
 
