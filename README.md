@@ -23,3 +23,4 @@ A functional and aesthetically pleasing minimalist browser homepage designed spe
   <img width="1918" height="880" alt="image" src="https://github.com/user-attachments/assets/4b5fe18e-c951-43c1-877b-ec2e7225a03e" />
 </p>
 
+⭐️ From [Muntasir](https://github.com/muntasiracive)
